@@ -4,10 +4,15 @@
     <div class="col-lg-4 col-lg-offset-4">
         <form ng-submit="submit()" ng-controller="saveController" class="form-horizontal">
 
-            <input type="text" ng-model="text" name="text" class="form-control col-lg-10"/>
+            <input type="text" ng-model="name" name="name" class="form-control col-lg-10"/>
+            <input type="text" ng-model="email" name="email" class="form-control col-lg-10"/>
+            <input type="text" ng-model="password" name="password" class="form-control col-lg-10"/>
+
             <input type="submit" id="submit" class="btn btn-primary" value="Submit" />
 
-            <pre>list={{list}}</pre>
+            <pre>
+                result={{result}}
+            </pre>
         </form>
     </div>
 </div>

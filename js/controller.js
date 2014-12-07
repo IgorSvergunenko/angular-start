@@ -18,18 +18,33 @@ app.controller('successController', function($scope, dataService) {
     $scope.message = 'Look! I am a success page.';
 });
 
-app.controller('saveController', function($scope, dataService) {
-    $scope.list = [];
-    $scope.text = 'hello';
+app.factory('User', function ($http) {
+
+    return {
+        create: function(dataToSave) {
+            return $http.post('backend/save.php', dataToSave);
+        }
+    }
+});
+
+app.controller('saveController', function($scope, User) {
+
+    $scope.signup = {email:'',password:'',name:''};
+    $scope.result = '';
 
     $scope.submit = function() {
 
-        if ($scope.text) {
-            $scope.list.push(this.text);
-            $scope.text = '';
-        }
+        $scope.signup.name = this.name;
+        $scope.signup.email = this.email;
+        $scope.signup.password = this.password;
 
-        dataService.addData($scope.list);
-        window.location.href= "#success";
+        User.create($scope.signup).then(function (results) {
+            $scope.result = results.data;
+
+
+        });
+
+        //dataService.addData($scope.list);
+        //window.location.href= "#success";
     };
 });
